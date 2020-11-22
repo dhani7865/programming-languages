@@ -1,0 +1,61 @@
+Object subclass: #Account
+instanceVariableNames: 'balance interestRate'
+classVariableNames: ''
+poolDictionaries: ''
+category: 'BankAccount'!
+
+!Account methodsFor: 'as yet unclassified' stamp: 'me 10/23/2018 15:42'!
+balance
+^ balance.! !
+
+!Account methodsFor: 'as yet unclassified' stamp: 'me 10/23/2018 02:21'!
+credit: aNumber
+balance := balance + aNumber.
+! !
+
+!Account methodsFor: 'as yet unclassified' stamp: 'me 10/23/2018 15:42'!
+iterestRate
+^ interestRate! !
+
+
+!Account methodsFor: 'operation' stamp: 'me 10/23/2018 17:46'!
+yearsUntilAmount: amount
+| temp |
+temp := 0.
+[ amount > (self predictBalanceAfterYears: temp) ] whileTrue: [ temp := temp + 1 ].
+^temp.! !
+
+!Account methodsFor: 'operation' stamp: 'me 10/23/2018 17:34'!
+predictBalanceAfterYears: years 
+^ (balance * ((1 + interestRate) raisedTo: years))! !
+
+
+Account subclass: #CurrentAccount
+instanceVariableNames: ''
+classVariableNames: ''
+poolDictionaries: ''
+category: 'BankAccount'!
+
+!CurrentAccount methodsFor: 'initialization' stamp: 'me 10/23/2018 15:01'!
+initialize
+balance := 0.
+interestRate := 0.005.! !
+
+
+!CurrentAccount methodsFor: 'as yet unclassified' stamp: 'me 10/23/2018 15:41'!
+debit: amount
+balance >= amount ifTrue: [balance := balance - amount].
+
+! !
+
+
+Account subclass: #SavingsAccount
+instanceVariableNames: ''
+classVariableNames: ''
+poolDictionaries: ''
+category: 'BankAccount'!
+
+!SavingsAccount methodsFor: 'initialization' stamp: 'me 10/23/2018 02:46'!
+initialize
+balance := 0.
+interestRate := 0.015.! !
